@@ -4,6 +4,9 @@ install.packages("httpuv")
 library(httpuv)
 install.packages("httr")
 library(httr)
+install.packages("plotly")
+require(devtools)
+library(plotly)
 
 # Can be github, linkedin etc depending on application
 oauth_endpoints("github")
@@ -31,3 +34,27 @@ gitDF = jsonlite::fromJSON(jsonlite::toJSON(json1))
 
 # Subset data.frame
 gitDF[gitDF$full_name == "jtleek/datasharing", "created_at"] 
+
+#Interrogate the Github API to extract data from my own github account and summarise
+
+#Gets my data 
+myData = fromJSON("https://api.github.com/users/berryd1")
+
+#Displays number of followers
+myData$followers
+
+followers = fromJSON("https://api.github.com/users/berryd1/followers")
+followers$login #Gives user names of all my followers
+
+myData$following #Displays the number of people I am following
+
+following = fromJSON("https://api.github.com/users/berryd1/following")
+following$login #Gives the names of all the people I am following
+
+myData$public_repos #Displays the number of repositories I have
+
+repos = fromJSON("https://api.github.com/users/berryd1/repos")
+repos$name #Details of the names of my public repositories
+repos$created_at #Gives details of the date the repositories were created 
+repos$full_name #gives names of repositories
+
