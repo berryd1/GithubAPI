@@ -1,10 +1,11 @@
-install.packages("jsonlite")
+#install.packages("jsonlite")
 library(jsonlite)
-install.packages("httpuv")
+#install.packages("httpuv")
 library(httpuv)
-install.packages("httr")
+#install.packages("httr")
 library(httr)
-install.packages("plotly")
+#install.packages("plotly")
+#install.packages("devtools")
 require(devtools)
 library(plotly)
 
@@ -58,3 +59,14 @@ repos$name #Details of the names of my public repositories
 repos$created_at #Gives details of the date the repositories were created 
 repos$full_name #gives names of repositories
 
+#Used account of Sebastien Eustace to produce plots, one of the most popular developers on Github.
+#Used instead of my account as his account would produce more accurate results.
+#Big sample size produces better results.
+#Username is sdispater.
+
+myData = GET("https://api.github.com/users/sdispater/followers?per_page=100;", gtoken)
+stop_for_status(myData)
+extract = content(myData)
+#converts into dataframe
+githubDB = jsonlite::fromJSON(jsonlite::toJSON(extract))
+githubDB$login
