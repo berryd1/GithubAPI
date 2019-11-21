@@ -157,5 +157,18 @@ Sys.setenv("plotly_api_key"="XyyQOXDnbEyvvNTJPWzz")
 #Y-axis displays 'followers' which shows the no. of followers of each each of Sebastien Eustace's followers.
 plot1 = plot_ly(data = usersDB, x = ~repos, y = ~followers, text = ~paste("Followers: ", followers, "<br>Repositories: ", repos, "<br>Date Created:", dateCreated), color = ~dateCreated)
 plot1
+#Sends graph to plotly
+api_create(plot1, filename = "Repositories vs Followers")
 #Plot can be viewed on plotly for more interactive visualisation of the data: https://plot.ly/~berryd1/1/#/
+
+#Plot two graphs following vs followers by year.
+#Takes into account 150 of Sebastien Eustace's followers.
+#The data is represented by a scatter plot.
+#X-axis displays 'following' which shows the no. of users followed by each of Sebastien's followers.
+#Y-axis displays 'followers' which shows the no. of followers of each of Sebastien Eustace's followers.
+plot2 = plot_ly(data = usersDB, x = ~following, y = ~followers, text = ~paste("Followers: ", followers, "<br>Following: ", following), color = ~dateCreated)
+plot2
+#Sends graph to plotly
+api_create(plot2, filename = "Following vs Followers")
+#Plot can be viewed on plotly for more interactive visualisation of the data: https://plot.ly/~berryd1/3/
 
